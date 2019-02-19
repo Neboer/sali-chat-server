@@ -5,8 +5,7 @@ import User from './User'
 import Users from "./Users";
 
 class ServerUser extends Users{
-    public socket: WebSocket | null;
-    public onLine: boolean;
+    public socket: WebSocket;
 
     constructor(user:User) {
         super(); // ServerUser对象只能由User实例化
@@ -18,16 +17,13 @@ class ServerUser extends Users{
     public login = (socket:any|WebSocket) => {
         this.socket = socket;
         this.lastLogin = new Date();
-        this.onLine = true;
     };
     public logout = () => {
-        this.socket = null;
         this.lastLogout = new Date();
-        this.onLine = false;
     };
 
     public send(message: Message|ServerCommand) {
-        if (this.onLine) {
+        if (this.socket.readyState===1) {
             message.send(this.socket)
         }
     }

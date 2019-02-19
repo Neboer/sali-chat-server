@@ -1,6 +1,6 @@
 # Sali-Chat-server
-[![Build Status](https://travis-ci.org/bootstrap-tagsinput/bootstrap-tagsinput.svg?branch=master)](https://travis-ci.org/bootstrap-tagsinput/bootstrap-tagsinput)
->沙粒聊天室的服务端2.0版本，请配合3.0.1版本客户端使用。
+![Build Status](https://travis-ci.org/bootstrap-tagsinput/bootstrap-tagsinput.svg?branch=master)
+>沙粒聊天室的服务端2.1版本，请配合3.1版本客户端使用。
 ## 基于node.js设计的响应式程序
 请参考其他客户端源代码以及开发者技术文档。<br>
 沙粒聊天客户端开发者欢迎您的加入。[参考文档下载](http://45.76.194.96:8085/helpdoc.pdf)

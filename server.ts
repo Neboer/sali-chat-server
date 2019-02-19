@@ -49,19 +49,19 @@ const wsServer = new Server({
 });
 
 wsServer.on('connection', (socket, req) => {// 服务器与客户端之间传递的数据有命令和消息两种。命令和消息都是JSON串。
-    const name = parse(req.url);
+    const name = parse(req.url);// 解析连接url，获得用户名
     const existUser: ServerUser | null = userList.findUserByName(name);
-    if (existUser === null) { // 新人注册
+    if (existUser === null) { // 新用户首次登录
         const loginUser: ServerUser = (new ServerUser(new User(name, new Date(), new Date(0))));
         loginUser.login(socket);
         userList.addUser(loginUser);
-        userList.broadcast(new ServerCommand('login', {user: loginUser.toUser()}))
+        userList.broadcast(new ServerCommand('login', {user: loginUser.toUser()}))// 广播用户上线消息
     } else {
         (existUser as ServerUser).login(socket);
         userList.broadcast(new ServerCommand('login', {user: (existUser as ServerUser).toUser()}))
     }
     socket.on('message', data => {           // 命令是"{command:addUser,...}"的形式，第一个key一定是command
-        const comeMessage = Message.parse(data.toString());
+        const comeMessage = Message.parse(data.toString());// 服务器解析Message为消息对象
         userList.broadcast(comeMessage)
     });
     socket.on("close", () => {
