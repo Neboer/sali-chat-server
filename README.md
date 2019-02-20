@@ -12,3 +12,19 @@
 响应式消息传输，异步axios处理，有效提高加载速度，响应消息更加快速便捷。
 ## 推荐使用docker进行项目部署
 项目源码包含dockerfile，可以直接构建并运行。
+### 项目部署流程
+ 1. 克隆整个仓库，然后进入仓库中
+    ```git
+    git clone https://github.com/Neboer/sali-chat-server.git
+    cd sali-chat-server
+    ```
+ 2. 直接执行（将name换成你的名字）
+    ```
+    docker build -t name .
+    ```
+ 3. 选定端口号。在后台运行（将name换成你的名字）
+    ``` 
+    docker run -d -it -p 8080:8080 -p 8081:8081 name
+    ```
+ 如果没有错误，那么输入```docker ps``` 就可以查看运行状态了。<br>
+ 这个项目是服务端程序，需要和客户端配合。
