@@ -1,0 +1,7 @@
+{
+  "database": "mml",
+  "username": "root",
+  "password": "",
+  "host": "localhost",
+  "dialect": "mysql"
+}
