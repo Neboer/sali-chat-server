@@ -16,17 +16,23 @@
 将用户表和聊天记录表保存在数据库中，便于管理，查询。
 ### 项目部署流程
  1. 克隆整个仓库，然后进入仓库中
-    ```git
+    ```
     git clone https://github.com/Neboer/sali-chat-server.git
     cd sali-chat-server
     ```
- 2. 直接执行（将name换成你的名字）
+ 2. 修改数据库配置
+    ```
+    vim Database.json
+    ```
+    注意，请妥善配置数据库。若数据库存在，首次运行会与之对接。如果出现差错，请issue告知。<br>
+    程序运行之后会主动检查是否连通，若没有连接成功会直接报错终止。
+ 2. 直接建立镜像（将name换成你的名字）
     ```
     docker build -t name .
     ```
- 3. 选定端口号。在后台运行（将name换成你的名字）
+ 3. 选定端口号。在后台运行实例（将name换成你的名字）
     ``` 
-    docker run -d -it -p 8080:8080 -p 8081:8081 name
+    docker run -d -it -p 8080:8080 -p 8081:8081 -p 3306 name
     ```
  如果没有错误，那么输入```docker ps``` 就可以查看运行状态了。<br>
  这个项目是服务端程序，需要和客户端配合。

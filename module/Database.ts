@@ -1,13 +1,22 @@
 import Sequelize = require("sequelize");
 import * as Database from '../Database.json'
-// import {where} from "sequelize";
 
 const seq = new Sequelize(Database.database, Database.username, Database.password, {
     host: Database.host,
     dialect: Database.dialect,
     operatorsAliases: false,
-    logging: true
+    // logging: true
 });
+export function authenticate() {
+    seq.authenticate()
+        .then(() => {
+            console.log('Connection has been established successfully.');
+        })
+        .catch(err => {
+            console.error('Unable to connect to the database:', err);
+            process.exit(1);
+        });
+}
 
 const userTable = seq.define('user', {
     username: {

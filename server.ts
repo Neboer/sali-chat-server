@@ -1,14 +1,14 @@
 // 服务器入口，程序主逻辑
 import http = require('http');
 import {Server} from 'ws';
-import {insertUser, queryUser, queryUserExistence} from "./module/Database";
+import {authenticate,insertUser, queryUser, queryUserExistence} from "./module/Database";
 import Message from './module/Message'
 import {parse, postSender, userList} from "./module/Post"
 import ServerCommand from './module/ServerCommand'
 import ServerUser from './module/ServerUser'
 import User from "./module/User";
 
-http.createServer((request, response) => {
+http.createServer((request, response) => {// 建立http服务器
     if (request.method === 'POST') {// verify form data
         let data = '';
         request.on('data', (chunk => {
@@ -50,13 +50,15 @@ http.createServer((request, response) => {
         response.writeHead(200, {'Access-Control-Allow-origin': '*'});
         postSender(response, userList.toOnlineString())
     }
-    if (request.method === 'OPTIONS') {
-        response.writeHead(200, {
-            'Access-Control-Allow-origin': '*', 'Access-Control-Allow-Methods': 'POST'
-        });
-        response.end()
-    }
+    // if (request.method === 'OPTIONS') {
+    //     response.writeHead(200, {
+    //         'Access-Control-Allow-origin': '*', 'Access-Control-Allow-Methods': 'POST'
+    //     });
+    //     response.end()
+    // }
 }).listen(8080);
+
+authenticate();// 检查数据库连接
 
 const wsServer = new Server({
     port: 8081,
