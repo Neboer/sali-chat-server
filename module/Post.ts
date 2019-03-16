@@ -63,7 +63,7 @@ function findUserBySocket(socket: WebSocket | any): ServerUser | null {
 function toOnlineString() {
     return JSON.stringify(this.userList
         .filter((user: ServerUser) => {
-            return (user.socket.readyState === 1)
+            return (user.socket.readyState === 1)// 显示在线用户
         })
         .map((user: ServerUser) => {
             return user.toUser().toString()

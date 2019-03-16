@@ -1,7 +1,7 @@
 // 服务器入口，程序主逻辑
 import http = require('http');
 import {Server} from 'ws';
-import {authenticate,insertUser, queryUser, queryUserExistence} from "./module/Database";
+import {db_init, insertUser, queryUser, queryUserExistence} from "./module/Database";
 import Message from './module/Message'
 import {parse, postSender, userList} from "./module/Post"
 import ServerCommand from './module/ServerCommand'
@@ -46,7 +46,7 @@ http.createServer((request, response) => {// 建立http服务器
             }
         });
     }
-    if (request.method === 'GET') {
+    if (request.method === 'GET' && request.url === '/online') {
         response.writeHead(200, {'Access-Control-Allow-origin': '*'});
         postSender(response, userList.toOnlineString())
     }
@@ -58,7 +58,7 @@ http.createServer((request, response) => {// 建立http服务器
     // }
 }).listen(8080);
 
-authenticate();// 检查数据库连接
+db_init();// 数据库初始化
 
 const wsServer = new Server({
     port: 8081,
