@@ -3,5 +3,6 @@
   "username": "root",
   "password": "",
   "host": "localhost",
-  "dialect": "mysql"
+  "dialect": "mysql",
+  "rebuild": false
 }

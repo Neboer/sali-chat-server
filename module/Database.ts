@@ -1,5 +1,5 @@
+import editJSON = require("edit-json-file");
 import Sequelize = require("sequelize");
-import waitForUserInput = require("wait-for-user-input");
 import * as Database from '../Database.json'
 
 
@@ -38,10 +38,17 @@ export function db_init() {
         })
         .then(() => {
             seq.query('SELECT 1 FROM users LIMIT 1').then(
-                (async () => {// 表存在，不用担心
-                    await waitForUserInput("you already have the users table, please backup and restore all data." +
-                        "The programme will rebuild your table to blank.Press enter to continue.")
-                }), (() => {// 表不存在，准备创建
+                (() => {
+                    if (Database.rebuild) {// 表存在，但是需要重建数据库
+                        console.log('Rebuild the database.After that, the database will not be rebuild anymore.');
+                        userTable.sync({force: true}).catch((err) => {
+                            console.error(err)
+                        });
+                        editJSON('Database.json').set('rebuild',false).save();//
+                        // 修改重建数据库的。注意这个数据库的路径是在项目目录下，而不是这个文件的目录
+                    }
+                })// 表存在
+                , (() => {// 表不存在，准备创建
                     userTable.sync({force: true}).catch((err) => {
                         console.error(err)
                     })
