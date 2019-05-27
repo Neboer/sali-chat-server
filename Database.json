@@ -1,7 +1,7 @@
 {
   "database": "sali_chat",
   "username": "root",
-  "password": "",
+  "password": "2000124",
   "host": "localhost",
   "dialect": "mysql",
   "rebuild": false

@@ -3,6 +3,7 @@ import Sequelize = require("sequelize");
 import * as Database from '../Database.json'
 
 
+// @ts-ignore-start
 const seq = new Sequelize(Database.database, Database.username, Database.password, {
     define: {
         charset: 'utf8',
@@ -13,7 +14,7 @@ const seq = new Sequelize(Database.database, Database.username, Database.passwor
     operatorsAliases: false,
     logging: false
 });
-
+// @ts-ignore-end
 const userTable = seq.define('user', {
     username: {
         type: Sequelize.STRING(255),
