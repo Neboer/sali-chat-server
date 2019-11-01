@@ -21,7 +21,7 @@
     "@types/sequelize": "^4.27.37",
     "edit-json-file": "^1.2.1",
     "mysql2": "^1.6.5",
-    "sequelize": "^5.3.5",
+    "sequelize": "^5.15.1",
     "tslint-config-prettier": "^1.18.0",
     "vue": "^2.6.7",
     "ws": "^6.1.3"
